@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Event.addEventListener & Event.removeEventListener</title>
+    <base href="../" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+	<link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css"></style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 --> 
+            <p>
+                <button class="btn" type="button" id="eventTarget">我是靶子</button>
+            </p>
+            <p>
+                <button class="btn btn-info" type="button" id="addEventButton">给靶子添加点击事件</button>
+                <button class="btn btn-info" type="button" id="removeEventButton">移除点击事件</button>
+            </p>
+            <p>
+                <button class="btn btn-info" type="button" id="addMouseEventButton">给靶子添加Hover事件</button>
+                <button class="btn btn-info" type="button" id="removeMouseEventButton">移除Hover事件</button>
+            </p>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" >
+;Jx().$package(function(J){
+    var $eventTarget = J.dom.id('eventTarget');
+    var onTargetClick = function(evt){
+        alert('oh! 我被点击了');
+    }
+    var onTargetMouseover = function(evt){
+        alert('oh! 我被抚摸啦');
+    }
+    J.event.on(J.dom.id('addEventButton'), 'click', function(evt){
+        J.event.on($eventTarget, 'click', onTargetClick);
+    });
+    J.event.on(J.dom.id('removeEventButton'), 'click', function(evt){
+        J.event.off($eventTarget, 'click', onTargetClick);
+    });
+    J.event.on(J.dom.id('addMouseEventButton'), 'click', function(evt){
+        J.event.on($eventTarget, 'mouseover', onTargetMouseover);
+    });
+    J.event.on(J.dom.id('removeMouseEventButton'), 'click', function(evt){
+        J.event.off($eventTarget, 'mouseover', onTargetMouseover);
+    });
+});        </pre>
+    </div>
+</div>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript">
+;Jx().$package(function(J){
+    var $eventTarget = J.dom.id('eventTarget');
+    var onTargetClick = function(evt){
+        alert('oh! 我被点击了');
+    }
+    var onTargetMouseover = function(evt){
+        alert('oh! 我被抚摸啦');
+    }
+    J.event.on(J.dom.id('addEventButton'), 'click', function(evt){
+        J.event.on($eventTarget, 'click', onTargetClick);
+    });
+    J.event.on(J.dom.id('removeEventButton'), 'click', function(evt){
+        J.event.off($eventTarget, 'click', onTargetClick);
+    });
+    J.event.on(J.dom.id('addMouseEventButton'), 'click', function(evt){
+        J.event.on($eventTarget, 'mouseover', onTargetMouseover);
+    });
+    J.event.on(J.dom.id('removeMouseEventButton'), 'click', function(evt){
+        J.event.off($eventTarget, 'mouseover', onTargetMouseover);
+    });
+});
+</script>
+</body>
+</html>

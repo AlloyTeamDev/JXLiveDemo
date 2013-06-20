@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="jx live demo">
+    <meta name="author" content="alloyteam">
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+	
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="span12">
+            <div class="page-header">
+                <h1  class="text-center">
+                    JX Live Demo
+                </h1>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			<div class="accordion" id="accordion">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordion-element-1">Dom</a>
+					</div>
+					<div id="accordion-element-1" class="accordion-body in collapse">
+						<div class="accordion-inner">
+							<ul>
+                                <li>
+                                    <a href="demo/dom.show&hide.html" target="demoWindow">show&hide</a>
+                                </li>
+                                <li>
+                                    <a href="demo/dom.setStyle&getStyle.html" target="demoWindow">setStyle&getStyle</a>
+                                </li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordion-element-2">Event</a>
+					</div>
+					<div id="accordion-element-2" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<ul>
+                                <li>
+                                    <a href="demo/event.on&off.html" target="demoWindow">addEventListener & removeEventListener</a>
+                                </li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordion-element-3">Http</a>
+                    </div>
+                    <div id="accordion-element-3" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            <ul>
+                                <li>
+                                    <a href="###" target="demoWindow">ajax</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="span8">
+            <div class="row-fluid">
+                <iframe id="demoWindow" name="demoWindow" frameborder="0" class="span12" src="about:blank"></iframe>
+            </div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

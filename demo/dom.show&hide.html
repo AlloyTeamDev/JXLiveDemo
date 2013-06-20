@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Dom.show & Dom.hide</title>
+    <base href="../" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+	<link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css"></style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 --> 
+            <p>
+                <button class="btn btn-info" type="button" id="toggleButton">隐藏</button>
+            </p>
+            <blockquote id="contentArea">
+                <p>要像对待荷叶上的露珠一样小心翼翼地保护学生幼小的心灵，晶莹透亮的露珠是美丽可爱的，但却十分脆弱，一不小心，就会滚落破碎，不复存在，学生的心灵，如同脆弱的露珠，需要老师的倍加呵护。——苏霍姆林斯基</p>
+            </blockquote>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js">
+;Jx().$package(function(J){
+    var $toggleButton = J.dom.id('toggleButton');
+    var $contentArea = J.dom.id('contentArea');
+    J.event.on($toggleButton, 'click', function(evt){
+        if(J.dom.isShow($contentArea)){
+            J.dom.hide($contentArea);
+            $toggleButton.innerHTML = '显示';
+        }else{
+            J.dom.show($contentArea);
+            $toggleButton.innerHTML = '隐藏';
+        }
+    });
+});        </pre>
+    </div>
+</div>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript">
+;Jx().$package(function(J){
+    var $toggleButton = J.dom.id('toggleButton');
+    var $contentArea = J.dom.id('contentArea');
+    J.event.on($toggleButton, 'click', function(evt){
+        if(J.dom.isShow($contentArea)){
+            J.dom.hide($contentArea);
+            $toggleButton.innerHTML = '显示';
+        }else{
+            J.dom.show($contentArea);
+            $toggleButton.innerHTML = '隐藏';
+        }
+    });
+});
+</script>
+</body>
+</html>
