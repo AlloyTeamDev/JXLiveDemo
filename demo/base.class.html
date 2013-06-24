@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Base.Class</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css"></style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 --> 
+            <p>
+                Class 方法可以方便的创建一个JS类，同时可以方便的对现有类进行继承。
+            </p>
+            <button class="btn btn-info" type="button" id="actionButton">演示</button>
+        </div>
+    </div> 
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource" auto-show></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J){
+    J.event.on(J.dom.id('actionButton'), 'click', function(evt){
+        var ClsA = J.Class({
+            init: function(){
+                this.name = 'ClsA';
+                console.log(this.name + ' inited.');
+            },
+            popup: function(){
+                alert('hello I\'m ' + this.name);
+            }
+        });
+
+        var ClsB = J.Class({extend : ClsA}, {
+            init: function(){
+                this.name = 'ClsB';
+                console.log(this.name + ' inited.');
+            },
+            shout: function(){
+                alert('我继承于 ClsA');
+                alert('我可以调用 ClsA的popup方法');
+                this.popup();
+            }
+        });
+
+        var obj1 = new ClsA();
+        obj1.popup();
+        var obj2 = new ClsB();
+        obj2.shout();
+    });
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>
