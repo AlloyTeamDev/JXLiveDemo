@@ -1,0 +1,54 @@
+==============【core】==============azrael
+$package
+==============【base】==============azrael
+extend
+clone
+bind
+Class
+==============【array】==============azrael
+indexOf / lastIndexOf
+forEach
+filter
+remove
+replace
+bubbleSort
+binarySearch
+==============【browser】==============yuanyan
+platform
+engine
+==============【cookie】==============yuanyan
+set
+get
+remove
+==============【dom】==============yuanyan
+id / tagName 
+node
+hasClass / addClass / removeClass
+setClass / getClass  
+toggleClass
+replaceClass
+setStyle / getStyle
+isShow / show / hide
+setTransform / getTransform
+getScrollWidth / getScrollHeight
+getClientWidth / getClientHeight
+getOffsetWidth / getOffsetHeight
+getWidth / getHeight
+setClientXY / getClientXY
+getXY / setXY
+getRelativeXY
+contains
+==============【event】==============dm
+addEventListener / removeEventListener
+onDomReady
+addObserver / notifyObservers / removeObserver
+==============【http】==============dm
+load
+ajax
+==============【format】==============dm
+date
+number
+==============【string】==============dm
+parseURL / buildURL
+mapQuery / toQueryString
+hexToRgb / rgbToHex

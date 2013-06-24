@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Base.clone</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css"></style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 --> 
+            <p>
+                clone 方法可以对一个对象进行克隆，得到一个完全全新的对象（不支持HTMLElement），克隆后的对象属性是存在于prototype的（而不是属于obj自身，JSON.stringify 无法把该属性转换成字符串），可以用点号操作符（如 obj.a ）访问。<br>
+
+            </p>
+            <pre>
+var obj1 = { a: 1, b: 2, c: '33'};
+</pre>
+            <button class="btn btn-info" type="button" id="actionButton">克隆obj1并把b属性修改为"22"</button>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js">
+;Jx().$package(function(J){
+    J.event.on(J.dom.id('extendButton'), 'click', function(evt){
+        var obj1 = { a: 1, b: 2, c: '33'};
+        var obj2 = { a2: 22, b: '22'};
+        var obj3 = { a3: 33, b3: '33'};
+        var newObj = J.extend(obj1, obj2, obj3);
+        alert('扩展结果: ' + J.json.stringify(newObj));
+    });
+});</pre>
+    </div>
+</div>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript">
+;Jx().$package(function(J){
+    J.event.on(J.dom.id('actionButton'), 'click', function(evt){
+        var obj1 = { a: 1, b: 2, c: '33'};
+        var newObj = J.clone(obj1);
+        var result = '克隆结果: newObj.a=' + newObj.a + ', newObj.b=' + newObj.b + ',newObj.c=' + newObj.c;
+        result += '\n修改: newObj.b=' + (newObj.b = '22');
+        result += '\n原对象: ' + J.json.stringify(obj1);
+        result += '\n克隆对象: ' + J.json.stringify(newObj);
+        alert(result);
+    });
+});
+</script>
+</body>
+</html>

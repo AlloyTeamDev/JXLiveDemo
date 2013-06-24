@@ -26,5 +26,7 @@
 
     J.event.on(window, 'load', resizeIframe);
     J.event.on(window, 'resize', resizeIframe);
-    J.event.on($toggleSource, 'click', toggleSource);
+    if($toggleSource){
+        J.event.on($toggleSource, 'click', toggleSource);
+    }
 });
