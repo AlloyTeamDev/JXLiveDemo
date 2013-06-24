@@ -2,20 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>JX Live Demo - Dom.show & Dom.hide</title>
+    <title>JX Live Demo - cookie</title>
     <base href="../" />
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/prettify.css" rel="stylesheet">
-	<link href="css/demo.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
   <![endif]-->
   
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="jx/jx.all.min.js"></script>
     <!-- 这里添加演示用的CSS --> 
     <style type="text/css"></style>
@@ -26,11 +26,19 @@
         <div class="span12">
             <!-- 这里添加演示代码 --> 
             <p>
-                <button class="btn btn-info" type="button" id="toggleButton">隐藏</button><small> <<点击左边的按钮可以显示或隐藏下面的这段文字</small>
+                Jx().cookie 提供操作Cookie的具体方法
             </p>
-            <blockquote id="contentArea">
-                <p>要像对待荷叶上的露珠一样小心翼翼地保护学生幼小的心灵，晶莹透亮的露珠是美丽可爱的，但却十分脆弱，一不小心，就会滚落破碎，不复存在，学生的心灵，如同脆弱的露珠，需要老师的倍加呵护。——苏霍姆林斯基</p>
-            </blockquote>
+
+            <pre>ookie.set(name, value, domain, path, hour)  设置一个cookie c</pre>
+            <button class="btn btn-info" type="button" id="actionButton1">在 cookie 中添加 id = yuanyan</button>
+            <hr>
+
+            <pre>cookie.get(name) 获取指定名称的cookie值</pre>
+            <button class="btn btn-info" type="button" id="actionButton2">在 cookie 中读取 id</button>
+            <hr>
+            <pre>cookie.remove(name, domain, path)  删除指定cookie,复写为过期</pre>
+            <button class="btn btn-info" type="button" id="actionButton3">在 cookie 中删除 id</button>
+            <hr>
         </div>
     </div>
     <p class="split-line"></p>
@@ -48,16 +56,17 @@
 <!-- 这里写演示的源代码 -->
 <script type="text/javascript" id="demoSource">
 ;Jx().$package(function(J){
-    var $toggleButton = J.dom.id('toggleButton');
-    var $contentArea = J.dom.id('contentArea');
-    J.event.on($toggleButton, 'click', function(evt){
-        if(J.dom.isShow($contentArea)){
-            J.dom.hide($contentArea);
-            $toggleButton.innerHTML = '显示';
-        }else{
-            J.dom.show($contentArea);
-            $toggleButton.innerHTML = '隐藏';
-        }
+    J.event.on(J.dom.id('actionButton1'), 'click', function(evt){
+        J.cookie.set('id', 'yuanyan');
+        alert("设置成功");
+    });
+    J.event.on(J.dom.id('actionButton2'), 'click', function(evt){
+        var value = J.cookie.get('id');
+        alert("读取成功：id=" + value);
+    });
+    J.event.on(J.dom.id('actionButton3'), 'click', function(evt){
+        J.cookie.remove('id');
+        alert("删除成功");
     });
 });
 </script>
