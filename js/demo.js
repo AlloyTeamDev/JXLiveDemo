@@ -2,12 +2,17 @@
 
     var $toggleSource = J.dom.id('toggleSource');
     var $source = J.dom.id('source');
+    var $printSource= J.dom.id('printSource');
+    var $demoSource= J.dom.id('demoSource');
 
     var resizeIframe = function(){
         window.parent.onIframeResize(J.dom.getClientWidth(document.body), J.dom.getClientHeight(document.body));
-    }
+    };
 
     var toggleSource = function(){
+        if(!$printSource.innerHTML){
+            $printSource.innerHTML = $demoSource.innerHTML
+        }
         if(!J.dom.isShow($source)){
             J.dom.show($source);
             $toggleSource.innerHTML = '隐藏源码';

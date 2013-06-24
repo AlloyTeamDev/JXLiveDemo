@@ -47,34 +47,11 @@
     <p></p>
     <div class="row-fluid demo-source" id="source">
         <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
-        <pre class="prettyprint lang-js" >
-;Jx().$package(function(J){
-    var $eventTarget = J.dom.id('eventTarget');
-    var onTargetClick = function(evt){
-        alert('oh! 我被点击了');
-    }
-    var onTargetMouseover = function(evt){
-        alert('oh! 我被抚摸啦');
-    }
-    J.event.on(J.dom.id('addEventButton'), 'click', function(evt){
-        J.event.on($eventTarget, 'click', onTargetClick);
-    });
-    J.event.on(J.dom.id('removeEventButton'), 'click', function(evt){
-        J.event.off($eventTarget, 'click', onTargetClick);
-    });
-    J.event.on(J.dom.id('addMouseEventButton'), 'click', function(evt){
-        J.event.on($eventTarget, 'mouseover', onTargetMouseover);
-    });
-    J.event.on(J.dom.id('removeMouseEventButton'), 'click', function(evt){
-        J.event.off($eventTarget, 'mouseover', onTargetMouseover);
-    });
-});        </pre>
+        <pre class="prettyprint lang-js" id="printSource"></pre>
     </div>
 </div>
-<script type="text/javascript" src="js/prettify.js"></script>
-<script type="text/javascript" src="js/demo.js"></script>
 <!-- 这里写演示的源代码 -->
-<script type="text/javascript">
+<script type="text/javascript" id="demoSource">
 ;Jx().$package(function(J){
     var $eventTarget = J.dom.id('eventTarget');
     var onTargetClick = function(evt){
@@ -97,5 +74,8 @@
     });
 });
 </script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+
 </body>
 </html>
