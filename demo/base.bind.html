@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Base.bind</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css"></style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 --> 
+            <p>
+                bind 方法可以将一个方法的执行上下文（context）修改为给定对象。
+            </p>
+            <button class="btn btn-info" type="button" id="actionButton">演示</button>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource" auto-show>
+;Jx().$package(function(J){
+    J.event.on(J.dom.id('actionButton'), 'click', function(evt){
+        var obj1 = { text: 'aaa'};
+        function tips(){
+            alert('this.text: ' + this.text);
+        }
+        tips();//执行时this指向了全局的window对象
+        var newTips = J.bind(tips, obj1);
+        newTips();//执行时this指向了全局的obj1对象
+    });
+});</pre>
+    </div>
+</div>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript">
+;Jx().$package(function(J){
+    J.event.on(J.dom.id('actionButton'), 'click', function(evt){
+        var obj1 = { text: 'aaa'};
+        function tips(){
+            alert('this.text: ' + this.text);
+        }
+        tips();//alert: undefined
+        var newTips = J.bind(tips, obj1);
+        newTips();//alert: aaa
+    });
+});
+</script>
+</body>
+</html>

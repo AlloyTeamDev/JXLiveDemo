@@ -10,7 +10,7 @@
     };
 
     var toggleSource = function(){
-        if(!$printSource.innerHTML){
+        if($printSource && !$printSource.innerHTML && $demoSource){
             $printSource.innerHTML = $demoSource.innerHTML
         }
         if(!J.dom.isShow($source)){
@@ -33,5 +33,9 @@
     J.event.on(window, 'resize', resizeIframe);
     if($toggleSource){
         J.event.on($toggleSource, 'click', toggleSource);
+    }
+
+    if($printSource && $printSource.hasAttribute('auto-show')){
+        toggleSource();
     }
 });
