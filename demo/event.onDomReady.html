@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Event.onDomReady</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css"></style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>文档加载完成时事件监听，它会在页面的dom结构绘制完毕执行，执行时间总是先于onload。下面的例子用了张大图以作对比，可刷新几次查看效果！</p>
+            <p>
+                <img src="" id="demo-img" width="10%" />
+            </p>
+            <p>文档load耗时：<b id="load-duration"></b>ms</p>
+            <p>文档domReady耗时：<b id="ready-duration"></b>ms</p>
+            <button class="btn" id="btn-refresh">刷新看效果</button>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var start = Date.now();
+    var $E = J.event;
+    var $D = J.dom;
+    var img = $D.id('demo-img');
+
+    img.src = '/JXLiveDemo/img/sea.jpg?_t=' + start;
+
+    $E.on(window, 'load', function() {
+        $D.id('load-duration').innerHTML = Date.now() - start;
+    });
+
+    $E.onDomReady(function() {
+        $D.id('ready-duration').innerHTML = Date.now() - start;
+    });
+
+    J.event.on($D.id('btn-refresh'), 'click', function(e) {
+        location.href = location.href;
+    });
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>

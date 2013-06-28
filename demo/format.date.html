@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Format.date</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css">
+        label {display: inline-block; margin: 0;}
+        input {margin: 0 !important;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>日期和时间格式化方法，让日期和时间按照指定的格式显示出来。</p>
+            <fieldset>
+                <legend>自己试试吧</legend>
+                <p>
+                    <label for="format">要显示的日期格式: </label>
+                    <input id="format" value="YYYY-MM-DD hh:mm:ss" />
+                </p>
+                <p>
+                    <button class="btn" id="look">查看</button>
+                </p>
+            </fieldset>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var $F = J.format;
+
+    var look = function() {
+        var d = new Date;
+        alert($F.date(d, J.dom.id('format').value));
+    };
+
+    J.event.on(J.dom.id('look'), 'click', look);
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>

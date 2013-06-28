@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Event.addObserver & Event.notifyObservers</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS -->
+    <style type="text/css">
+        label {display: inline-block; margin: 0;}
+        input {margin: 0 !important;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>addObserver为自定义Model添加事件监听，也可以是dom元素。</p>
+            <p>notifyObservers则触发Model上监听的某事件。</p>
+            <p>相应的，removeObserver则可以移除Model上添加的事件。</p>
+            <fieldset>
+                <legend>一个简单的例子</legend>
+                <p>
+                    <label for="first-name">First name: </label>
+                    <input id="first-name" name="firstName" placeholder="First name" />
+                </p>
+                <p>
+                    <label for="last-name">Last name: </label>
+                    <input id="last-name" name="lastName" placeholder="Last name" />
+                </p>
+                <p>
+                    <label for="union">设置fullName自动关联firstName和lastName：</label>
+                    <input id="union" type="checkbox" />
+                </p>
+                <p>
+                    <button class="btn btn-success" id="check">查看结果</button>
+                </p>
+            </fieldset>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var $E = J.event;
+    var $D = J.dom;
+
+    var People = {
+        firstName: '',
+        lastName: '',
+        fullName: ''
+    };
+
+    var setProp = function(param) {
+        People[param.prop] = param.value;
+    };
+
+    var setUnion = function() {
+        People.fullName = People.firstName + ' ' + People.lastName;
+    };
+
+    $E.addObserver(People, 'setProp', setProp);
+
+    $E.on($D.id('first-name'), 'change', function(e) {
+        $E.notifyObservers(People, 'setProp', {prop: 'firstName', value: e.target.value});
+    });
+    $E.on($D.id('last-name'), 'change', function(e) {
+        $E.notifyObservers(People, 'setProp', {prop: 'lastName', value: e.target.value});
+    });
+
+    $E.on($D.id('union'), 'change', function(e) {
+        if(e.target.checked) {
+            $E.addObserver(People, 'setUnion', setUnion);
+        } else {
+            $E.removeObserver(People, 'setUnion');
+        }
+        //$E.notifyObservers(People, 'setUnion');
+    });
+
+    $E.on($D.id('check'), 'click', function() {
+        $E.notifyObservers(People, 'setUnion');
+        alert('firstName: ' + People.firstName + 
+            '\nlastName: ' + People.lastName + 
+            '\nfullName: ' + People.fullName);
+    });
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>

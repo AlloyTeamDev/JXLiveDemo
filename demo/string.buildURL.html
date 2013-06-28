@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - String.buildURL</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css">
+        label {display: inline-block; margin: 0; width: 5em;}
+        input {margin: 0 !important;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>将一个包含标准的URL格式各部分：scheme（协议）、user（用户名）, pass（用户密码）, host（主机名）、port（端口号）、path（路径）、query（查询参数）、fragment（信息片断）的对象拼装成一个url</p>
+            <form id="url-form">
+                <fieldset>
+                    <legend>例子</legend>
+                    <p>
+                        <label for="scheme">协议: </label>
+                        <input id="scheme" name="scheme" value="http" />
+                    </p>
+                    <p>
+                        <label for="user">用户名: </label>
+                        <input id="user" name="user" value="guest" />
+                    </p>
+                    <p>
+                        <label for="pass">用户密码: </label>
+                        <input id="pass" name="pass" value="007" />
+                    </p>
+                    <p>
+                        <label for="host">主机名: </label>
+                        <input id="host" name="host" value="127.0.0.1" />
+                    </p>
+                    <p>
+                        <label for="port">端口号: </label>
+                        <input id="port" name="port" value="8080" />
+                    </p>
+                    <p>
+                        <label for="path">路径: </label>
+                        <input id="path" name="path" value="/temp/pictures" />
+                    </p>
+                    <p>
+                        <label for="query">查询参数: </label>
+                        <input id="query" name="query" value="date=20131010" />
+                    </p>
+                    <p>
+                        <label for="fragment">信息片断: </label>
+                        <input id="fragment" name="fragment" value="800*600" />
+                    </p>
+                    <p>
+                        <button type="button" class="btn" id="look">查看</button>
+                    </p>
+                </fieldset>
+            <form>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var $S = J.string;
+
+    var look = function() {
+        var ipts = J.dom.mini('input');
+        var obj = {};
+        var input;
+
+        while(input = ipts.shift()) {
+            if(input.value) {
+                obj[input.name] = input.value;
+            }
+        }
+        //console.log(obj);
+
+        alert($S.buildURL(obj));
+    };
+
+    J.event.on(J.dom.id('look'), 'click', look);
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>

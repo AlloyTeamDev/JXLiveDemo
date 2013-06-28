@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - String.parseURL</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css">
+        label {display: inline-block; margin: 0;}
+        input {margin: 0 !important;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>分解一个URL字符串为一个对象，对象成员包括标准的URL格式各部分：scheme（协议）、user（用户名）, pass（用户密码）, host（主机名）、port（端口号）、path（路径）、query（查询参数）、fragment（信息片断）</p>
+            <fieldset>
+                <legend>例子</legend>
+                <p>
+                    <label for="url">url: </label>
+                    <input id="url" value="http://www.qq.com:8888/a/b/c?d=1#e=2" />
+                </p>
+                <p>
+                    <button class="btn" id="look">查看</button>
+                </p>
+            </fieldset>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var $S = J.string;
+
+    var look = function() {
+        alert(J.json.stringify($S.parseURL(J.dom.id('url').value)));
+    };
+
+    J.event.on(J.dom.id('look'), 'click', look);
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>
