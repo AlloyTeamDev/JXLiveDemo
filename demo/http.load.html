@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Http.load</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css">
+        label {display: inline-block; margin: 0;}
+        input {margin: 0 !important;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>加载css或者script文件，第一个参数指定要load的文件类型；第二个参数是文件的路径；第三个参数是一些配置项：<br />
+                isDefer：标识是否延迟加载，值是true或者false，默认是不延迟<br />
+                query：文件路径后面跟的查询参数，默认是null<br />
+                arguments：请求参数对象，可以在回调函数里参数里直接访问，默认是null</br />
+                onSuccess：请求返回成功时的回调</br />
+                onError：请求失败的回调</br />
+                onTimeout：请求超时的回调，超时的时间由timeout参数决定，timeout默认是30000ms<br />
+                onComplete：无论超时、成功、还是失败都回执行，执行顺序都在相应的回调函数后面</br />
+                timeout：设置请求超时的时间间隔，默认不需要超时</br />
+                charset：字符集，默认是utf-8<br />
+                win：脚本需要插入到的window对象，默认是当前window
+            </p>
+            <fieldset>
+                <legend>例子</legend>
+                <h4>load_demo.css</h4>
+                <pre>body {background-color: #333; color: #FFF;}</pre>
+                <p><button class="btn" id="load-css">load css</button></p>
+                <h4>load_demo.js</h4>
+                <pre>(function() {alert('Script loaded!');}());</pre>
+                <p><button class="btn" id="load-script">load script</button></p>
+            </fieldset>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var $H = J.http;
+
+    var loadCss = function() {
+        $H.load('css', './demo/load_demo.css', {
+            onSuccess: function(r) {
+                console.log('Request success, result: ', r);
+            },
+            onError: function(r) {
+                console.log('Request error, result: ', r);
+            },
+            onComplete: function(r) {
+                console.log('Request complete, result: ', r);
+            }
+        });
+    };
+
+    var loadScript = function() {
+        $H.load('script', './demo/load_demo.js', {
+            onSuccess: function(r) {
+                console.log('Request success, result: ', r);
+            },
+            onError: function(r) {
+                console.log('Request error, result: ', r);
+            },
+            onComplete: function(r) {
+                console.log('Request complete, result: ', r);
+            }
+        });
+    };
+
+    J.event.on(J.dom.id('load-css'), 'click', loadCss);
+    J.event.on(J.dom.id('load-script'), 'click', loadScript);
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>

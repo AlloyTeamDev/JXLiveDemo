@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JX Live Demo - Http.ajax</title>
+    <base href="../" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jx/jx.all.min.js"></script>
+    <!-- 这里添加演示用的CSS --> 
+    <style type="text/css">
+        label {display: inline-block; margin: 0;}
+        input {margin: 0 !important;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- 这里添加演示代码 -->
+            <p>ajax方法，两个参数，第一个是请求的url，第二个是请求的一些配置，具体参数如下：<br />
+                method：请求的方法，默认是get<br />
+                data：请求的数据，默认为null</br />
+                arguments：请求参数对象，可以在回调函数里参数里直接访问，默认是null</br />
+                onSuccess：请求返回成功时的回调</br />
+                onError：请求失败的回调</br />
+                onTimeout：请求超时的回调，超时的时间由timeout参数决定，timeout默认是30000ms<br />
+                onComplete：无论超时、成功、还是失败都回执行，执行顺序都在相应的回调函数后面</br />
+                isAsync：标识请求是否是异步，true或者false<br />
+                timeout：设置请求超时的时间间隔，默认是30000ms</br />
+                contentType：设置http请求头的Content-Type，get方法默认是text/plain;charset=UTF-8，post方法默认是application/x-www-form-urlencoded;charset=UTF-8</br />
+                type：设置返回的数据格式，默认是xml
+            </p>
+            <fieldset>
+                <legend>例子</legend>
+                <p>
+                    <button class="btn" id="look">查看结果</button>
+                </p>
+            </fieldset>
+        </div>
+    </div>
+    <p class="split-line"></p>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" type="button" id="toggleSource">查看源码</button>
+        </div>
+    </div>
+    <p></p>
+    <div class="row-fluid demo-source" id="source">
+        <!-- 这里添加源代码，有css或html的时候，添加个新的pre标签，把lang-js改成css或html即可 -->
+        <pre class="prettyprint lang-js" id="printSource"></pre>
+    </div>
+</div>
+<!-- 这里写演示的源代码 -->
+<script type="text/javascript" id="demoSource">
+;Jx().$package(function(J) {
+    var $H = J.http;
+
+    var look = function() {
+        $H.ajax('./demo/about_jx.json', {
+            method: 'GET',
+            timeout: 3000,
+            type: 'json',
+            onComplete: function(r) {
+                alert('Request complete, result:\n' + J.json.stringify(r.responseJSON));
+            },
+            onSuccess: function(r) {
+                alert('Request success, result:\n' + J.json.stringify(r.responseJSON));
+            },
+            onTimeout: function(r) {
+                alert('Request timeout, result:\n' + J.json.stringify(r.responseJSON));
+            },
+            onError: function(r) {
+                alert('Request error, result:\n' + J.json.stringify(r.responseJSON));
+            }
+        });
+    };
+
+    J.event.on(J.dom.id('look'), 'click', look);
+});
+</script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>
